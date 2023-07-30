@@ -1,20 +1,26 @@
-var express = require('express');
-var router = express.Router();
-let {category} =require("../model");
-let config=require("../config/config")
-let categoryfunc=require("./function/catadd.js")
-/* GET home page. */
-router.post('/add', async (req, res, next)=> {
-  console.log("checkkkkkkk12344",req.body);
-// try{
-  // let data= await personfunc.create(req.body);
-  let data=await categoryfunc(req.body);
-  console.log("createdata..................",data)
-  res.send(data);
-// }catch(err){
-// return err;
-// }
+"use strict";
+module.exports = (sequelize, DataTypes) => {
+  const category = sequelize.define("category", {
+    id:{
+        allowNull:false,
+        autoIncrement:true,
+        primaryKey:true,
+        type:DataTypes.INTEGER
+      },
+    categoryName: DataTypes.STRING,
+    parentId: DataTypes.INTEGER,
+    status:DataTypes.BOOLEAN,
+    isSubcategory:DataTypes.BOOLEAN,
+    description: DataTypes.STRING,
+    image:DataTypes.TEXT,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+    deletedAt: DataTypes.DATE,
+  },
+  {
+    tableName: "categories"
+  }
+  );
 
-});
-
-module.exports = router;
+  return category;
+};

@@ -1,59 +1,38 @@
-var express = require('express');
-var router = express.Router();
-let {login} =require("../model/");
-let config=require("../config/config")
+"use strict";
 
-/* GET home page. */
-router.post('/add',  (req, res, next)=> {
-  console.log("checkkkkkkk",req.body);
-try{
-  let login_data= req.body;
-  login_data.email= req.body.login_email
-  let data=  login.create(login_data);
+const { DATE } = require("sequelize");
 
- console.log("data",typeof(data))
- let isempty=Object.keys(data).length==0;
- if(!isempty){
-  res.send(data);
- }else{
-  throw new  Error("User Already Created")
- }
- 
-}catch(err){
-throw new  Error(err);
-}
+module.exports = (sequelize, DataTypes) => {
+  const login = sequelize.define("login",
+   {
+    id:{
+        allowNull:false,
+        autoIncrement:true,
+        primaryKey:true,
+        type:DataTypes.INTEGER
+      },
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
 
-});
-router.post('/userlogin', async (req, res, next)=> {
-  console.log("checkkkkkkk",req.body);
-try{
-  let login_data= req.body;
-console.log("login_data",login_data)
-  let data= await login.findOne({
-    where:{
-      email:login_data.email
+    createdAt:{
+        type: DataTypes.DATE,
+        defaultValue:new Date(),
+        allowNull: false
+    },
+    updatedAt:{
+        type: DataTypes.DATE,
+        defaultValue: new Date(),
+        allowNull: true
+    },
+    deletedAt:{
+        type: DataTypes.DATE,
+        allowNull: true
     }
-  });
-  
- console.log("data",data);
- if(data){
-  let validate=data.password==login_data.password;
-  if(validate){
-    //return "User Logged in Successfully";
-    res.send("User Logged in Successfully")
-    console.log("user verified")
-  }else{
-    res.send("Password Not match");
+},
+  {
+    tableName: "logins"
   }
- }else{
- res.send("User Not register")
- }
- 
- 
-}catch(err){
- 
-throw new  Error(err);
-}
-return "User Logged in Successfully"
-});
-module.exports = router;
+  );
+
+  return login;
+};

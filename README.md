@@ -1,4 +1,4 @@
-# Fashion E-commerce Website
+#  E-commerce Working Website
 
 This is a Fashion E-commerce website built using Vue.js, Vuetify, Node.js, Sequelize, and MySQL. The project aims to provide a seamless shopping experience for users to browse and purchase the latest fashion products.
 

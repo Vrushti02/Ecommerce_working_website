@@ -1,4 +1,6 @@
-Fashion E-Commerce Website -
+
+# Fashion E-Commerce Website - README
+
 
 This repository contains an E-Commerce website for fashion products, built using Vue.js, Vuetify, Node.js, Sequelize, MySQL, and JavaScript. The website offers a platform for users to browse and purchase fashion products in a user-friendly and visually appealing interface
 
